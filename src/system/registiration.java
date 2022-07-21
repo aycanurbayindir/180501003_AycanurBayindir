@@ -360,10 +360,26 @@ public class registiration extends JFrame {
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/database?useTimezone=true&serverTimezone=UTC" ,"root", "12345678");
 					String querykinder= "insert into kinder(idkinder, nachname, vorname, geschlecht, geburtsdatum, lehrerin ,kurspakett, eltern_name, ideltern, kursnummer)"
 							+ "values(?,?,?,?,?,?,?,?,?,?)";
-					//String queryeltern= "insert into eltern(ideltern, elternname, telefonnummer, email ,kurspakett,zahlungssitiation, kinder)"
-							//+ "values(?,?,?,?,?,?,?)";
+					String queryeltern= "insert into eltern(ideltern, elternname, telefonnummer, email ,kurspakett,zahlungssitiation, kinder)"
+							+ "values(?,?,?,?,?,?,?)";
+					
+					/*
+					
+					String querybeziehung= "insert into kinder_eltern(beziehungnum, kinderid,elternid )" 
+							+ "values(?,?)";
+					PreparedStatement pstbeziehung= con.prepareStatement(querybeziehung);
+					
+					
+					
+					pstbeziehung.setString(1, id.getText());
+					pstbeziehung.setString(1, elternid.getText());
+					int numRowsAffected = pstbeziehung.executeUpdate();
+					
+					
+					*/
 					PreparedStatement pstkinder= con.prepareStatement(querykinder);
-					//PreparedStatement psteltern= con.prepareStatement(queryeltern);
+					PreparedStatement psteltern= con.prepareStatement(queryeltern);
+					
 					
 					pstkinder.setString(1, id.getText());
 					pstkinder.setString(2, kindernachname.getText());
@@ -392,7 +408,7 @@ public class registiration extends JFrame {
 					
 					kursnum = kursnummer_box.getSelectedItem().toString();
 					pstkinder.setString(10, kursnum);
-					/*		
+						
 					psteltern.setString(1, elternid.getText());
 					psteltern.setString(2, elternname.getText());
 					psteltern.setString(3, telefon.getText());
@@ -407,7 +423,7 @@ public class registiration extends JFrame {
 					
 					pstkinder.executeUpdate();
 					psteltern.executeUpdate();
-					*/
+				
 					JOptionPane.showMessageDialog(null, "Erfolgreich hinzugefügt!");
 					
 					
@@ -424,6 +440,18 @@ public class registiration extends JFrame {
 		panel.add(btnLschen);
 		
 		JButton btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				id.setText(" ");
+				kindernachname.setText("");
+				kindervorname.setText("");
+				elternname.setText("");
+				elternid.setText("");
+				telefon.setText("");
+				email.setText("");
+				gd.setText("");
+			}
+		});
 		btnReset.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnReset.setBackground(new Color(176, 224, 230));
 		btnReset.setBounds(882, 292, 182, 52);

@@ -114,7 +114,7 @@ public class Admin_personalinfo extends JFrame {
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setForeground(new Color(25, 25, 112));
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblUsername.setBounds(20, 487, 96, 16);
+		lblUsername.setBounds(20, 487, 125, 16);
 		contentPane.add(lblUsername);
 		
 		id = new JTextField();
